@@ -1,6 +1,7 @@
 const axios = require("axios");
 const bcrypt = require("bcryptjs");
-
+const tokenService = require("./token-service.js");
+const Users = require("./users-model");
 const { authenticate } = require("../auth/authenticate");
 
 module.exports = server => {
@@ -35,8 +36,7 @@ function login(req, res) {
         const token = tokenService.generateToken(user);
         res.status(200).json({
           message: `Welcome ${user.username}! Have a token.`,
-          token,
-          roles: token.roles
+          token
         });
       } else {
         res.status(401).json({ message: "you need the right creds!" });
