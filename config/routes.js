@@ -26,6 +26,25 @@ function register(req, res) {
 
 function login(req, res) {
   // implement user login
+  let { username, password } = req.body;
+
+  Users.findBy({ username })
+    .first()
+    .then(user => {
+      if (user && bcrypt.compareSync(password, user.password)) {
+        const token = tokenService.generateToken(user);
+        res.status(200).json({
+          message: `Welcome ${user.username}! Have a token.`,
+          token,
+          roles: token.roles
+        });
+      } else {
+        res.status(401).json({ message: "you need the right creds!" });
+      }
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
 }
 
 function getJokes(req, res) {
