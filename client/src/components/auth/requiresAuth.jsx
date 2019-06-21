@@ -17,7 +17,7 @@ export default function(Component) {
   return class Authenticated extends React.Component {
     render() {
       const token = localStorage.token;
-      const logMessage = <div>Please log in to see the users</div>;
+      const logMessage = <div>Please log in to see sweet dad jokes!</div>;
       return <>{token ? <Component {...this.props} /> : logMessage}</>;
     }
   };

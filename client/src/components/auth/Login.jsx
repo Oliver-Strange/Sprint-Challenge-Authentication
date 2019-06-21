@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import styled from "styled-components";
 
 class Login extends React.Component {
   state = {
@@ -29,33 +30,63 @@ class Login extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div>
-          <label htmlFor="username">Username</label>
-          <input
+      <StyledForm onSubmit={this.handleSubmit}>
+        <StyledDiv>
+          <label htmlFor="username">Username </label>
+          <StyledInput
             onChange={this.handleChange}
             value={this.state.username}
             name="username"
             id="username"
             type="text"
           />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
+        </StyledDiv>
+        <StyledDiv>
+          <label htmlFor="password">Password </label>
+          <StyledInput
             onChange={this.handleChange}
             value={this.state.password}
             name="password"
             id="password"
             type="password"
           />
-        </div>
-        <div>
-          <button type="submit"> Login </button>
-        </div>
-      </form>
+        </StyledDiv>
+        <StyledDiv>
+          <StyledButton type="submit"> Login </StyledButton>
+        </StyledDiv>
+      </StyledForm>
     );
   }
 }
+
+const StyledForm = styled.form`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 250px;
+  height: 250px;
+  margin: 50px auto;
+  padding: 10px;
+  background-color: lightgrey;
+  border-radius: 8px;
+`;
+
+const StyledDiv = styled.div`
+  margin: 5px;
+`;
+
+const StyledInput = styled.input`
+  border-style: none;
+  border-radius: 5px;
+`;
+
+const StyledButton = styled.button`
+  border-style: none;
+  border-radius: 5px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
 export default Login;
